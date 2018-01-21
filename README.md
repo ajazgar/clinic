@@ -1,1 +1,1 @@
-# chonotu.app
+# clinic.app
