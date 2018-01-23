@@ -16,3 +16,7 @@ html(lang='pl')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Referrals
           br
+        ol#listofusers
+          each val in values
+            li  #{val.idSkierowania}, #{val.idPacjenta}, #{val.idLekarza}, #{val.idWizyty}
+            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.login) Usuń  

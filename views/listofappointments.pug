@@ -16,3 +16,7 @@ html(lang='pl')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Appointments
           br
+        ol#listofusers
+          each val in values
+            li  #{val.idWizyty}, #{val.Data}, #{val.Domowa}, #{val.Platna}, #{idLekarza}, #{idPacjenta}
+            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.idWizyty) Usuń
