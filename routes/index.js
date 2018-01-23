@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+//localhost:3000/panel
+router.get('/panel', function(req, res, next) {
+  res.render('panel');
+});
+
+
 module.exports = router;

@@ -1,0 +1,64 @@
+doctype html
+html(lang='pl')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale-1')
+    link(rel='stylesheet', href='style.css')
+    title Panel
+  body
+    main
+      form#main
+        input(type='search', placeholder='Search')
+        a.button(href='event.html') Go
+      .content-buttons
+        a.button(href='#popup1') Add doctor
+        a.button(href='#popup2') Add patient
+        a.button(href='#popup3') Add appointment
+        a.button(href='#popup4') Add receipt
+        a.button(href='#popup5') Add referral
+      #popup1.overlay
+        .popup
+          a.close(href='#') ×
+          .content
+            h2 Add doctor
+            input(type='text', name='id', placeholder='Identification Number')
+            input(type='text', name='Haslo', placeholder='Password')
+            input(type='text', name='Imie', placeholder='Name')
+            input(type='text', name='Nazwisko', placeholder='Surname')
+            input(type='text', name='Specjalizacja', placeholder='Specialization')
+            input(type='submit', value='Add')
+      #popup2.overlay
+        .popup
+          a.close(href='#') ×
+          .content
+            h2 Add patient
+            input(type='text', name='id', placeholder='Identification Number')
+            input(type='text', name='Imie', placeholder='Name')
+            input(type='text', name='Nazwisko', placeholder='Surname')
+            input(type='text', name='Ubezpieczenie', placeholder='Insurance')
+            input(type='submit', value='Add')
+      #popup3.overlay
+        .popup
+          a.close(href='#') ×
+          .content
+            h2 Add appointment
+            input(type='text', name='id', placeholder='Identification Number')
+            input(type='text', name='Data', placeholder='Date')
+            input(type='text', name='Domowa', placeholder='Home/Clinic')
+            input(type='text', name='Platne', placeholder='Paid/Free')
+            input(type='submit', value='Add')
+      #popup4.overlay
+        .popup
+          a.close(href='#') ×
+          .content
+            h2 Add receipt
+            input(type='text', name='id', placeholder='Identification Number')
+            input(type='text', name='Refundcja', placeholder='Refundation')
+            input(type='submit', value='Add')
+      #popup5.overlay
+        .popup
+          a.close(href='#') ×
+          .content
+            h2 Add referral
+            input(type='text', name='id', placeholder='Identification Number')
+            input(type='submit', value='Add')
