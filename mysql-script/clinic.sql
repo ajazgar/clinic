@@ -18,21 +18,20 @@ USE `clinic`;
 -- Table `clinic`.`lekarz`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `clinic`.`lekarz` (
-  `idLekarza` INT NOT NULL AUTO_INCREMENT,
+  `idLekarza` INT NOT NULL auto_increment,
+  `login` VARCHAR(100) NOT NULL,
   `Haslo` VARCHAR(45) NOT NULL,
-  `Imie` VARCHAR(45) NOT NULL,
-  `Nazwisko` VARCHAR(45) NOT NULL,
   `Specjalizacja` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idLekarza`))
 ENGINE = InnoDB;
 
 INSERT INTO `lekarz` VALUES
-(1,'password', 'Jan','Kowalski', 'internista'),
-(2,'password','Marek','Malinowski','kardiolog'),
-(3,'password','Andrzej','Tomczynski','laryngolog'),
-(4,'password','Aleksander','Nowak','okulista'),
-(5,'password','Rafal','Polak','neurolog'),
-(99, 'password', 'admin', 'admin', 'admin');
+(1,'JanKowalski','password','internista'),
+(2,'MarekMalinowski', 'password', 'kardiolog'),
+(3,'AndrzejTomczynski', 'password', 'laryngolog'),
+(4,'AleksanderNowak', 'password','okulista'),
+(5,'RafalPolak', 'password','neurolog'),
+(99,'admin', 'password', 'admin');
 
 
 -- -----------------------------------------------------
@@ -40,18 +39,17 @@ INSERT INTO `lekarz` VALUES
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `clinic`.`pacjent` (
   `idPacjenta` INT NOT NULL AUTO_INCREMENT,
-  `Imie` VARCHAR(45) NOT NULL,
-  `Nazwisko` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL,
   `nrUbezpieczenia` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPacjenta`))
 ENGINE = InnoDB;
 
 INSERT INTO `pacjent` VALUES
-(10,'Agata','Skiba', 0123),
-(11,'Grzegorz','Zielinski',4567),
-(12,'Patrycja','Machera', 8910),
-(13,'Krzysztof','Kmera', 1112),
-(14,'Pawel','Krasnicki',1314);
+(10,'AgataSkiba', 0123),
+(11,'GrzegorzZielinski',4567),
+(12,'PatrycjaMachera', 8910),
+(13,'KrzysztofKmera', 1112),
+(14,'PawelKrasnicki',1314);
 
 
 -- -----------------------------------------------------
@@ -131,15 +129,15 @@ CREATE TABLE IF NOT EXISTS `clinic`.`recepta` (
   `idRecepty` INT NOT NULL AUTO_INCREMENT,
   `idChoroby` INT NOT NULL,
   `Refundacja` INT NOT NULL,
-  `pacjent_idPacjenta` INT NOT NULL,
+  `idPacjenta` INT NOT NULL,
   `idLekarza` INT NOT NULL,
   `idWizyty` INT NOT NULL,
-  PRIMARY KEY (`idRecepty`, `pacjent_idPacjenta`, `idLekarza`, `idWizyty`),
-  INDEX `fk_recepta_pacjent1_idx` (`pacjent_idPacjenta` ASC),
+  PRIMARY KEY (`idRecepty`, `idPacjenta`, `idLekarza`, `idWizyty`),
+  INDEX `fk_recepta_pacjent1_idx` (`idPacjenta` ASC),
   INDEX `fk_recepta_lekarz1_idx` (`idLekarza` ASC),
   INDEX `fk_recepta_wizyta1_idx` (`idWizyty` ASC),
   CONSTRAINT `fk_recepta_pacjent1`
-    FOREIGN KEY (`pacjent_idPacjenta`)
+    FOREIGN KEY (`idPacjenta`)
     REFERENCES `clinic`.`pacjent` (`idPacjenta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,

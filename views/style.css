@@ -157,7 +157,7 @@ input[type="search"] {
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
 }
-/*input[name="Wiadomosc"] {
+input[name="Wiadomosc"] {
     position: relative;
     left: 30%;
     width: 40%;
@@ -171,7 +171,7 @@ input[type="search"] {
     background-position: 95% 10px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
-}*/
+}
 input{
     position: relative;
     left: 30%;

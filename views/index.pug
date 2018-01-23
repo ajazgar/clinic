@@ -10,10 +10,12 @@ html(lang='pl')
       .middle-text
         .content-text
           h1 Welcome to Clinic!
-        form
-          input(type='text', name='Login', placeholder='Your id')
-        form
-          input(type='password', name='Haslo', placeholder='Password')
+        form#fields(action='/checkIfUsernameExists')
+          input#login.txt(type='text', name='idLekarza', required='', placeholder='Your id')
+          br
+          input.txt(type='password', name='Haslo', required='', placeholder='Password')
+          br
+          input(type='submit', value='Zaloguj')
         br
         .content-buttons
           a.button(href='/panel') Sign up
