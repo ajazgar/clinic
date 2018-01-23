@@ -8,62 +8,74 @@ html(lang='pl')
   body
     main
       .content-buttons
-        a.button(href='/' style="background-color: #6A2E2E;") Sign out
+        a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
       .content-buttons
-        a.button(href='#popup1') Add doctor
-        a.button(href='#popup2') Add patient
-        a.button(href='#popup3') Add appointment
-        a.button(href='#popup4') Add receipt
-        a.button(href='#popup5') Add referral
+        a.button(href='#popup1') Dodaj lekarza
+        a.button(href='#popup2') Dodaj pacjenta
+        a.button(href='#popup3') Dodaj wizytę
+        a.button(href='#popup4') Dodaj receptę
+        a.button(href='#popup5') Dodaj skierowanie
       .content-buttons
-        a.button(href='/listofdoctors' style="background-color: #8C999A;") View doctors
-        a.button(href='/listofpatients' style="background-color: #8C999A;") View patients
-        a.button(href='/listofappointments' style="background-color: #8C999A;") View appointments
-        a.button(href='/listofreceipts' style="background-color: #8C999A;") View receipts
-        a.button(href='/listofreferrals' style="background-color: #8C999A;") View referrals  
+        a.button(href='/listofdoctors' style="background-color: #8C999A;") Lista lekarzy
+        a.button(href='/listofpatients' style="background-color: #8C999A;") Lista pacjentów
+        a.button(href='/listofappointments' style="background-color: #8C999A;") Lista wizyt
+        a.button(href='/listofreceipts' style="background-color: #8C999A;") Lista recept
+        a.button(href='/listofreferrals' style="background-color: #8C999A;") Lista skierowań 
       #popup1.overlay
         .popup
           a.close(href='#') ×
           .content
-            h2 Add doctor
-            input(type='text', name='id', placeholder='Identification Number')
-            input(type='text', name='Haslo', placeholder='Password')
-            input(type='text', name='Imie', placeholder='Name')
-            input(type='text', name='Nazwisko', placeholder='Surname')
-            input(type='text', name='Specjalizacja', placeholder='Specialization')
-            input(type='submit', value='Add')
+            h2 Dodaj lekarza
+            form#fields(action='/addDoctor')
+              input(type='text', name='idLekarza', placeholder='id')
+              input(type='text', name='login', placeholder='login')
+              input(type='text', name='Haslo', placeholder='Password')
+              input(type='text', name='Specjalizacja', placeholder='Specialization')
+              input(type='submit', value='Dodaj')
       #popup2.overlay
         .popup
           a.close(href='#') ×
-          .content
-            h2 Add patient
-            input(type='text', name='id', placeholder='Identification Number')
-            input(type='text', name='Imie', placeholder='Name')
-            input(type='text', name='Nazwisko', placeholder='Surname')
-            input(type='text', name='Ubezpieczenie', placeholder='Insurance')
-            input(type='submit', value='Add')
+          .content#fields
+            h2 Dodaj pacjenta
+            form#fields(action='/addPatient')
+              input(type='text', name='idPacjenta', placeholder='id')
+              input(type='text', name='login', placeholder='login')
+              input(type='text', name='Ubezpieczenie', placeholder='nrUbezpieczenia')
+              input(type='submit', value='Dodaj')
       #popup3.overlay
         .popup
           a.close(href='#') ×
           .content
-            h2 Add appointment
-            input(type='text', name='id', placeholder='Identification Number')
-            input(type='text', name='Data', placeholder='Date')
-            input(type='text', name='Domowa', placeholder='Home/Clinic')
-            input(type='text', name='Platne', placeholder='Paid/Free')
-            input(type='submit', value='Add')
+            h2 Dodaj wizytę
+            form#fields(action='/addAppointment')
+              input(type='text', name='idWizyty', placeholder='id Wizyty')
+              input(type='text', name='Data', placeholder='Data')
+              input(type='text', name='Domowa', placeholder='Domowa')
+              input(type='text', name='Platna', placeholder='Platna')
+              input(type='text', name='idLekarza', placeholder='id Lekarza')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
+              input(type='submit', value='Dodaj')
       #popup4.overlay
         .popup
           a.close(href='#') ×
           .content
-            h2 Add receipt
-            input(type='text', name='id', placeholder='Identification Number')
-            input(type='text', name='Refundcja', placeholder='Refundation')
-            input(type='submit', value='Add')
+            h2 Dodaj receptę
+            form#fields(action='/addReceipt')
+              input(type='text', name='idRecepty', placeholder='id')
+              input(type='text', name='idChoroby', placeholder='id Choroby')
+              input(type='text', name='Refundacja', placeholder='Refundacja')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
+              input(type='text', name='idLekarza', placeholder='id Lekarza')
+              input(type='text', name='idWizyty', placeholder='id Wizyty')
+              input(type='submit', value='Dodaj')
       #popup5.overlay
         .popup
           a.close(href='#') ×
           .content
-            h2 Add referral
-            input(type='text', name='id', placeholder='Identification Number')
-            input(type='submit', value='Add')
+            h2 Dodaj skierowanie
+            form#fields(action='/addReferral')
+              input(type='text', name='idSkierowania', placeholder='id')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
+              input(type='text', name='idLekarza', placeholder='id Lekarza')
+              input(type='text', name='idWizyty', placeholder='id Wizyty')
+              input(type='submit', value='Dodaj')

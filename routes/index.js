@@ -21,11 +21,45 @@ router.get('/panel', function(req, res, next) {
   res.render('panel', {"valid": req.query.valid});
 });
 
-router.get('/addUser', function(req, res, next) {
-  var post = [req.query.idLekarza, req.query.login, req.query.Specjalizacja];
+
+///ADDING
+router.get('/addDoctor', function(req, res, next) {
+  var post = [req.query.idLekarza, req.query.login, req.query.Haslo, req.query.Specjalizacja];
   var query = connection.query('insert into lekarz values(?,?,?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/panel?valid=1');
+    res.redirect('/listofdoctors');
+  });
+});
+
+router.get('/addPatient', function(req, res, next) {
+  var post = [req.query.idPacjenta, req.query.login, req.query.nrUbezpieczenia];
+  var query = connection.query('insert into pacjent values(?,?,?)', post, function (error, results, fields) {
+    if (error) throw error;
+    res.redirect('/listofpatients');
+  });
+});
+
+router.get('/addAppointment', function(req, res, next) {
+  var post = [req.query.idWizyty, req.query.Data, req.query.Domowa, req.query.Platna, req.query.idLekarza, req.query.idPacjenta];
+  var query = connection.query('insert into wizyta values(?,?,?,?,?,?)', post, function (error, results, fields) {
+    if (error) throw error;
+    res.redirect('/listofappointments');
+  });
+});
+
+router.get('/addReceipt', function(req, res, next) {
+  var post = [req.query.idRecepty, req.query.idChoroby, req.query.Refundacja, req.query.idPacjenta, req.query.idLekarza];
+  var query = connection.query('insert into recepta values(?,?,?,?,?,?)', post, function (error, results, fields) {
+    if (error) throw error;
+    res.redirect('/listofreceipts');
+  });
+});
+
+router.get('/addReferral', function(req, res, next) {
+  var post = [req.query.idSkierowania, req.query.idPacjenta, req.query.idLekarza, req.query.idWizyty];
+  var query = connection.query('insert into skierowanie values(?,?,?,?)', post, function (error, results, fields) {
+    if (error) throw error;
+    res.redirect('/listofreferrals');
   });
 });
 
