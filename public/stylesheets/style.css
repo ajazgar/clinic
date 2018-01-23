@@ -6,23 +6,75 @@ html, body {
     font-family: 'Roboto', Arial, sans-serif;
 }
 
-nav {
+/*nav {
     overflow: hidden;
     position: fixed;
     width: 100%;
     background-color: #333;
     height: 74px;
     line-height: 74px;
+}*/
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
 }
 
-.inner-topnav {
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  /*max-height: 30%;*/
+  height: 400px;
+  overflow: hidden;
+  text-align: center;
+}
+
+
+
+/*.inner-topnav {
     max-width: 960px;
     margin: auto;
 }
 
 .topnav-buttons {
     float: right;
-}
+}*/
 
 .button {
     display: inline-block;
@@ -39,6 +91,7 @@ nav {
     cursor: pointer;
     color: white;
 }
+
 a {
     text-decoration: none;
     color: white;
@@ -104,7 +157,7 @@ input[type="search"] {
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
 }
-input[name="Wiadomosc"] {
+/*input[name="Wiadomosc"] {
     position: relative;
     left: 30%;
     width: 40%;
@@ -118,11 +171,12 @@ input[name="Wiadomosc"] {
     background-position: 95% 10px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
-}
+}*/
 input{
     position: relative;
     left: 30%;
     width: 40%;
+    display: block;
     box-sizing: border-box;
     border: 3px solid #ccc;
     border-radius: 25px;
@@ -133,6 +187,13 @@ input{
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
 }
+
+input[type="submit"] {
+    background-color: #D88F3C;
+    width: 40%;
+}
+
+
 textarea{
     position: relative;
     left: 30%;
@@ -184,7 +245,7 @@ textarea{
     cursor: pointer;
     width: 100%;
     text-align: center;
-	border-radius: 25px;
+    border-radius: 25px;
 }
 
 .dropdown {
@@ -278,7 +339,7 @@ textarea{
     font-size: 16px;
     left: 25%;
     top: 180px;
-	background-color: #333;
+    background-color: #333;
 }
 
 .row {

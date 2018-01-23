@@ -1,0 +1,16 @@
+doctype html
+html(lang='pl')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale-1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Patients
+  body
+    header
+      main
+        #search
+          form#searchfield(action='listofusers')
+            input(type='text', name='userToSearch', required='required', style='display: inline-block;')
+            input(type='submit', value='Search', style='display: inline-block;')
+          h3#usersheader Patients
+          br
