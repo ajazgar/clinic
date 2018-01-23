@@ -7,15 +7,20 @@ html(lang='pl')
     title Panel
   body
     main
-      form#main
-        input(type='search', placeholder='Search')
-        a.button(href='event.html') Go
+      .content-buttons
+        a.button(href='/' style="background-color: #6A2E2E;") Sign out
       .content-buttons
         a.button(href='#popup1') Add doctor
         a.button(href='#popup2') Add patient
         a.button(href='#popup3') Add appointment
         a.button(href='#popup4') Add receipt
         a.button(href='#popup5') Add referral
+      .content-buttons
+        a.button(href='/listofdoctors' style="background-color: #8C999A;") View doctors
+        a.button(href='/listofpatients' style="background-color: #8C999A;") View patients
+        a.button(href='/listofappointments' style="background-color: #8C999A;") View appointments
+        a.button(href='/listofreceipts' style="background-color: #8C999A;") View receipts
+        a.button(href='/listofreferrals' style="background-color: #8C999A;") View referrals  
       #popup1.overlay
         .popup
           a.close(href='#') ×
