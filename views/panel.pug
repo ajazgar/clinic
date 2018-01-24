@@ -6,6 +6,32 @@ html(lang='pl')
     link(rel='stylesheet', href='/stylesheets/style.css')
     title Panel
   body
+    script.
+      function redirectToDoctors() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/listofdoctors?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
+      function redirectToPatients() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/listofpatients?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
+      function redirectToAppointments() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/listofappointments?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
+      function redirectToReceipts() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/listofreceipts?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
+      function redirectToReferrals() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/listofreferrals?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
     main
       .content-buttons
         a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
@@ -16,11 +42,11 @@ html(lang='pl')
         a.button(href='#popup4') Dodaj receptę
         a.button(href='#popup5') Dodaj skierowanie
       .content-buttons
-        a.button(href='/listofdoctors' style="background-color: #8C999A;") Lista lekarzy
-        a.button(href='/listofpatients' style="background-color: #8C999A;") Lista pacjentów
-        a.button(href='/listofappointments' style="background-color: #8C999A;") Lista wizyt
-        a.button(href='/listofreceipts' style="background-color: #8C999A;") Lista recept
-        a.button(href='/listofreferrals' style="background-color: #8C999A;") Lista skierowań 
+        a.button(onclick='redirectToDoctors()', style="background-color: #8C999A;") Lista lekarzy
+        a.button(onclick='redirectToPatients()', style="background-color: #8C999A;") Lista pacjentów
+        a.button(onclick='redirectToAppointments()', style="background-color: #8C999A;") Lista wizyt
+        a.button(onclick='redirectToReceipts()', style="background-color: #8C999A;") Lista recept
+        a.button(onclick='redirectToReferrals()', style="background-color: #8C999A;") Lista skierowań 
       #popup1.overlay
         .popup
           a.close(href='#') ×

@@ -6,11 +6,18 @@ html(lang='pl')
     link(rel='stylesheet', href='/stylesheets/style.css')
     title Patients
   body
+    script.
+      function redirectToPanel() {
+      var idLekarza = location.search.split('idLekarza=')[1];
+      var url= '/panel?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
+      
     header
       main
         .content-buttons
           a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
-          a.button(href='/panel' style="background-color: #6A2E2E;") Wróć
+          a.button(onclick='redirectToPanel()', style="background-color: #6A2E2E;") Wróć
         #search
           form#searchfield(action='listofusers')
             input(type='text', name='userToSearch', required='required', style='display: inline-block;')
