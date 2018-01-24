@@ -19,12 +19,12 @@ html(lang='pl')
           a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
           a.button(onclick='redirectToPanel()', style="background-color: #6A2E2E;") Wróć
         #search
-          form#searchfield(action='listofusers')
+          form#searchfield(action='listofreferrals')
             input(type='text', name='userToSearch', required='required', style='display: inline-block;')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Referrals
           br
         ol#listofusers
           each val in values
-            li  #{val.idSkierowania}, #{val.idPacjenta}, #{val.idLekarza}, #{val.idWizyty}
-            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.login) Usuń  
+            li  id:#{val.idSkierowania}, idPacjenta:#{val.idPacjenta}, idLekarza:#{val.idLekarza}
+            a.button#userbutton(href='/deleteReferral?login=admin&userToDelete=' + val.login) Usuń  

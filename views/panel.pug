@@ -55,8 +55,8 @@ html(lang='pl')
             form#fields(action='/addDoctor')
               input(type='text', name='idLekarza', placeholder='id')
               input(type='text', name='login', placeholder='login')
-              input(type='text', name='Haslo', placeholder='Password')
-              input(type='text', name='Specjalizacja', placeholder='Specialization')
+              input(type='text', name='Haslo', placeholder='Haslo')
+              input(type='text', name='Specjalizacja', placeholder='Specjalizacja')
               input(type='submit', value='Dodaj')
       #popup2.overlay
         .popup
@@ -66,7 +66,6 @@ html(lang='pl')
             form#fields(action='/addPatient')
               input(type='text', name='idPacjenta', placeholder='id')
               input(type='text', name='login', placeholder='login')
-              input(type='text', name='Ubezpieczenie', placeholder='nrUbezpieczenia')
               input(type='submit', value='Dodaj')
       #popup3.overlay
         .popup
@@ -92,7 +91,6 @@ html(lang='pl')
               input(type='text', name='Refundacja', placeholder='Refundacja')
               input(type='text', name='idPacjenta', placeholder='id Pacjenta')
               input(type='text', name='idLekarza', placeholder='id Lekarza')
-              input(type='text', name='idWizyty', placeholder='id Wizyty')
               input(type='submit', value='Dodaj')
       #popup5.overlay
         .popup
@@ -103,5 +101,4 @@ html(lang='pl')
               input(type='text', name='idSkierowania', placeholder='id')
               input(type='text', name='idPacjenta', placeholder='id Pacjenta')
               input(type='text', name='idLekarza', placeholder='id Lekarza')
-              input(type='text', name='idWizyty', placeholder='id Wizyty')
               input(type='submit', value='Dodaj')

@@ -1,16 +1,5 @@
--- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
--- -----------------------------------------------------
--- Schema clinicDB
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema clinicDB
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `clinicDB` DEFAULT CHARACTER SET utf8;
 USE `clinicDB`;
 
@@ -40,16 +29,15 @@ INSERT INTO `lekarz` VALUES
 CREATE TABLE IF NOT EXISTS `clinicDB`.`pacjent` (
   `idPacjenta` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(45) NOT NULL,
-  `nrUbezpieczenia` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPacjenta`))
 ENGINE = InnoDB;
 
 INSERT INTO `pacjent` VALUES
-(10,'AgataSkiba', 0123),
-(11,'GrzegorzZielinski',4567),
-(12,'PatrycjaMachera', 8910),
-(13,'KrzysztofKmera', 1112),
-(14,'PawelKrasnicki',1314);
+(10,'AgataSkiba'),
+(11,'GrzegorzZielinski'),
+(12,'PatrycjaMachera'),
+(13,'KrzysztofKmera'),
+(14,'PawelKrasnicki');
 
 
 -- -----------------------------------------------------
@@ -88,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `clinicDB`.`skierowanie` (
   `idSkierowania` INT NOT NULL AUTO_INCREMENT,
   `idPacjenta` INT NOT NULL,
   `idLekarza` INT NOT NULL,
-  `idWizyty` INT NOT NULL,
   PRIMARY KEY (`idSkierowania`),
     FOREIGN KEY (`idPacjenta`)
     REFERENCES `clinicDB`.`pacjent` (`idPacjenta`)
@@ -97,19 +84,15 @@ CREATE TABLE IF NOT EXISTS `clinicDB`.`skierowanie` (
     FOREIGN KEY (`idLekarza`)
     REFERENCES `clinicDB`.`lekarz` (`idLekarza`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (`idWizyty`)
-    REFERENCES `clinicDB`.`wizyta` (`idWizyty`)
-    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 INSERT INTO `skierowanie` VALUES
-(1234, 10, 1, 123),
-(1245, 12, 2, 124),
-(1256, 14, 3, 125),
-(1267, 11, 4, 126),
-(1278, 13, 5, 127);
+(1234, 10, 1),
+(1245, 12, 2),
+(1256, 14, 3),
+(1267, 11, 4),
+(1278, 13, 5);
 
 
 -- -----------------------------------------------------
@@ -121,7 +104,6 @@ CREATE TABLE IF NOT EXISTS `clinicDB`.`recepta` (
   `Refundacja` INT NOT NULL,
   `idPacjenta` INT NOT NULL,
   `idLekarza` INT NOT NULL,
-  `idWizyty` INT NOT NULL,
   PRIMARY KEY (`idRecepty`),
     FOREIGN KEY (`idPacjenta`)
     REFERENCES `clinicDB`.`pacjent` (`idPacjenta`)
@@ -130,22 +112,14 @@ CREATE TABLE IF NOT EXISTS `clinicDB`.`recepta` (
     FOREIGN KEY (`idLekarza`)
     REFERENCES `clinicDB`.`lekarz` (`idLekarza`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (`idWizyty`)
-    REFERENCES `clinicDB`.`wizyta` (`idWizyty`)
-    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 INSERT INTO `recepta` VALUES
-(1001, 987, 100, 10, 1, 123),
-(1002, 986, 50, 12, 2, 124),
-(1003, 985, 30, 14, 3, 125),
-(1004, 984, 0, 11, 4, 126),
-(1005, 983, 100, 13, 5, 127);
+(1001, 987, 100, 10, 1),
+(1002, 986, 50, 12, 2),
+(1003, 985, 30, 14, 3),
+(1004, 984, 0, 11, 4),
+(1005, 983, 100, 13, 5);
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

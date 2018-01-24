@@ -19,12 +19,12 @@ html(lang='pl')
           a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
           a.button(onclick='redirectToPanel()', style="background-color: #6A2E2E;") Wróć
         #search
-          form#searchfield(action='listofusers')
+          form#searchfield(action='listofreceipts')
             input(type='text', name='userToSearch', required='required', style='display: inline-block;')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Receipts
           br
         ol#listofusers
           each val in values
-            li  #{val.idRecepty}, #{val.idChoroby}, #{val.Refundacja}, #{idPacjenta}, #{idLekarza}, #{idWizyty}
-            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.idRecepty) Usuń  
+            li  id:#{val.idRecepty}, idChoroby:#{val.idChoroby}, Refundacja:#{val.Refundacja}, idPacjenta:#{val.idPacjenta}, idLekarza:#{val.idLekarza}
+            a.button#userbutton(href='/deleteReceipt?login=admin&userToDelete=' + val.idRecepty) Usuń  

@@ -27,15 +27,15 @@ router.get('/addDoctor', function(req, res, next) {
   var post = [req.query.idLekarza, req.query.login, req.query.Haslo, req.query.Specjalizacja];
   var query = connection.query('insert into lekarz values(?,?,?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/listofdoctors');
+    res.redirect('/listofdoctors?idLekarza='+req.query.idLekarza);
   });
 });
 
 router.get('/addPatient', function(req, res, next) {
-  var post = [req.query.idPacjenta, req.query.login, req.query.nrUbezpieczenia];
-  var query = connection.query('insert into pacjent values(?,?,?)', post, function (error, results, fields) {
+  var post = [req.query.idPacjenta, req.query.login];
+  var query = connection.query('insert into pacjent values(?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/listofpatients');
+    res.redirect('/listofpatients?idLekarza='+req.query.idLekarza);
   });
 });
 
@@ -43,23 +43,23 @@ router.get('/addAppointment', function(req, res, next) {
   var post = [req.query.idWizyty, req.query.Data, req.query.Domowa, req.query.Platna, req.query.idLekarza, req.query.idPacjenta];
   var query = connection.query('insert into wizyta values(?,?,?,?,?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/listofappointments');
+    res.redirect('/listofappointments?idLekarza='+req.query.idLekarza);
   });
 });
 
 router.get('/addReceipt', function(req, res, next) {
   var post = [req.query.idRecepty, req.query.idChoroby, req.query.Refundacja, req.query.idPacjenta, req.query.idLekarza];
-  var query = connection.query('insert into recepta values(?,?,?,?,?,?)', post, function (error, results, fields) {
+  var query = connection.query('insert into recepta values(?,?,?,?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/listofreceipts');
+    res.redirect('/listofreceipts?idLekarza='+req.query.idLekarza);
   });
 });
 
 router.get('/addReferral', function(req, res, next) {
-  var post = [req.query.idSkierowania, req.query.idPacjenta, req.query.idLekarza, req.query.idWizyty];
-  var query = connection.query('insert into skierowanie values(?,?,?,?)', post, function (error, results, fields) {
+  var post = [req.query.idSkierowania, req.query.idPacjenta, req.query.idLekarza];
+  var query = connection.query('insert into skierowanie values(?,?,?)', post, function (error, results, fields) {
     if (error) throw error;
-    res.redirect('/listofreferrals');
+    res.redirect('/listofreferrals?idLekarza='+req.query.idLekarza);
   });
 });
 
@@ -80,16 +80,50 @@ router.get('/checkIfUsernameExists', function(req, res, next) {
 
 
 //http://localhost:3000/delete?id=admin&userToDelete=AndrzejTomczynski
-router.all('/delete', function(req, res, next) {
+router.all('/deleteDoctor', function(req, res, next) {
   var post = [req.query.userToDelete];
   var query = connection.query('delete from lekarz where idLekarza=?', post, function (error, results, fields) {
     if (error) throw error;
-    // if(req.query.idLekarza == undefined) res.redirect('/'); //in case of deleting own account
-    // else 
-    res.redirect('/listofdoctors?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    	res.redirect('/listofdoctors?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    
   });
 });
 
+router.all('/deletePatient', function(req, res, next) {
+  var post = [req.query.userToDelete];
+  var query = connection.query('delete from pacjent where idPacjenta=?', post, function (error, results, fields) {
+    if (error) throw error;
+    	res.redirect('/listofpatients?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    
+  });
+});
+
+router.all('/deleteAppointment', function(req, res, next) {
+  var post = [req.query.userToDelete];
+  var query = connection.query('delete from wizyta where idWizyty=?', post, function (error, results, fields) {
+    if (error) throw error;
+    	res.redirect('/listofappointments?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    
+  });
+});
+
+router.all('/deleteReceipt', function(req, res, next) {
+  var post = [req.query.userToDelete];
+  var query = connection.query('delete from recepta where idRecepty=?', post, function (error, results, fields) {
+    if (error) throw error;
+    	res.redirect('/listofreceipts?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    
+  });
+});
+
+router.all('/deleteReferral', function(req, res, next) {
+  var post = [req.query.userToDelete];
+  var query = connection.query('delete from skierowanie where idSkierowania=?', post, function (error, results, fields) {
+    if (error) throw error;
+    	res.redirect('/listofreferrals?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+    
+  });
+});
 
 router.get('/listofdoctors', function(req, res, next) {
 
@@ -99,7 +133,9 @@ router.get('/listofdoctors', function(req, res, next) {
   		var post  = {login: req.query.userToSearch};
   		connection.query('SELECT * FROM lekarz where ?', post, function(err, rows, fields) {
             var person = {
-              'login':rows[0].login
+              'idLekarza':rows[0].idLekarza,
+              'login':rows[0].login,
+              'Specjalizacja':rows[0].Specjalizacja
             };
             	values.push(person);
       		res.render('listofdoctors', {"values": values, "login": req.query.login});
@@ -131,7 +167,9 @@ router.get('/listofpatients', function(req, res, next) {
   		var post  = {login: req.query.userToSearch};
   		connection.query('SELECT * FROM pacjent where ?', post, function(err, rows, fields) {
             var person = {
-              'login':rows[0].login
+              'idPacjenta':rows[0].idPacjenta,
+              'login':rows[0].login,
+              'nrUbezpieczenia':rows[0].nrUbezpieczenia
             };
             	values.push(person);
       		res.render('listofpatients', {"values": values, "login": req.query.login});
@@ -163,7 +201,12 @@ router.get('/listofappointments', function(req, res, next) {
   		var post  = {idWizyty: req.query.userToSearch};
   		connection.query('SELECT * FROM wizyta where ?', post, function(err, rows, fields) {
             var person = {
-              'idWizyty':rows[0].idWizyty
+              'idWizyty':rows[0].idWizyty,
+              'Data':rows[0].Data,
+              'Domowa':rows[0].Domowa,
+              'Platna':rows[0].Platna,
+              'idLekarza':rows[0].idLekarza,
+              'idPacjenta':rows[0].idPacjenta
             };
             	values.push(person);
       		res.render('listofappointments', {"values": values, "idWizyty": req.query.idWizyty});
@@ -198,7 +241,12 @@ router.get('/listofreceipts', function(req, res, next) {
   		var post  = {idRecepty: req.query.userToSearch};
   		connection.query('SELECT * FROM recepta where ?', post, function(err, rows, fields) {
             var person = {
-              'idRecepty':rows[0].idRecepty
+              'idRecepty':rows[0].idRecepty,
+              'idChoroby':rows[0].idChoroby,
+              'Refundacja':rows[0].Refundacja,
+              'idPacjenta':rows[0].idPacjenta,
+              'idLekarza':rows[0].idLekarza,
+              'idWizyty':rows[0].idWizyty
             };
             	values.push(person);
       		res.render('listofreceipts', {"values": values, "idRecepty": req.query.idRecepty});
@@ -234,7 +282,10 @@ router.get('/listofreferrals', function(req, res, next) {
   		var post  = {idSkierowania: req.query.userToSearch};
   		connection.query('SELECT * FROM skierowanie where ?', post, function(err, rows, fields) {
             var person = {
-              'idSkierowania':rows[0].idSkierowania
+              'idSkierowania':rows[0].idSkierowania,
+              'idPacjenta':rows[0].idPacjenta,
+              'idLekarza':rows[0].idLekarza,
+              'idWizyty':rows[0].idWizyty
             };
             	values.push(person);
       		res.render('listofreferrals', {"values": values, "idSkierowania": req.query.idSkierowania});

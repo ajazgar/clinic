@@ -19,12 +19,12 @@ html(lang='pl')
           a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
           a.button(onclick='redirectToPanel()', style="background-color: #6A2E2E;") Wróć
         #search
-          form#searchfield(action='listofusers')
+          form#searchfield(action='listofpatients')
             input(type='text', name='userToSearch', required='required', style='display: inline-block;')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Patients
           br
         ol#listofusers
           each val in values
-            li  #{val.idPacjenta}, #{val.login}, #{val.nrUbezpieczenia}
-            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.login) Usuń  
+            li  id:#{val.idPacjenta}, login:#{val.login}
+            a.button#userbutton(href='/deletePatient?login=admin&userToDelete=' + val.login) Usuń  

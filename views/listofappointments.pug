@@ -19,12 +19,12 @@ html(lang='pl')
           a.button(href='/' style="background-color: #6A2E2E;") Wyloguj się
           a.button(onclick='redirectToPanel()', style="background-color: #6A2E2E;") Wróć
         #search
-          form#searchfield(action='listofusers')
+          form#searchfield(action='listofappointments')
             input(type='text', name='userToSearch', required='required', style='display: inline-block;')
             input(type='submit', value='Search', style='display: inline-block;')
           h3#usersheader Appointments
           br
         ol#listofusers
           each val in values
-            li  #{val.idWizyty}, #{val.Data}, #{val.Domowa}, #{val.Platna}, #{idLekarza}, #{idPacjenta}
-            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.idWizyty) Usuń
+            li  id:#{val.idWizyty}, data:#{val.Data}, domowa:#{val.Domowa}, płatna:#{val.Platna}, idLekarza:#{val.idLekarza}, idPacjenta:#{val.idPacjenta}
+            a.button#userbutton(href='/deleteAppointment?login=admin&userToDelete=' + val.idWizyty) Usuń

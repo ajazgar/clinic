@@ -404,7 +404,7 @@ footer {
 #listofusers{
     position: relative;
       max-width: 35%;
-      max-height: 200px;
+      height: 400px;
       z-index: 15;
       /*top: 50%;*/
       left: 15%;
