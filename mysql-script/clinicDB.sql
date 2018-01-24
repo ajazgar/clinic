@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema clinic
+-- Schema clinicDB
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema clinic
+-- Schema clinicDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `clinic` DEFAULT CHARACTER SET utf8;
-USE `clinic`;
+CREATE SCHEMA IF NOT EXISTS `clinicDB` DEFAULT CHARACTER SET utf8;
+USE `clinicDB`;
 
 -- -----------------------------------------------------
--- Table `clinic`.`lekarz`
+-- Table `clinicDB`.`lekarz`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinic`.`lekarz` (
+CREATE TABLE IF NOT EXISTS `clinicDB`.`lekarz` (
   `idLekarza` INT NOT NULL auto_increment,
   `login` VARCHAR(100) NOT NULL,
   `Haslo` VARCHAR(45) NOT NULL,
@@ -35,9 +35,9 @@ INSERT INTO `lekarz` VALUES
 
 
 -- -----------------------------------------------------
--- Table `clinic`.`pacjent`
+-- Table `clinicDB`.`pacjent`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinic`.`pacjent` (
+CREATE TABLE IF NOT EXISTS `clinicDB`.`pacjent` (
   `idPacjenta` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(45) NOT NULL,
   `nrUbezpieczenia` VARCHAR(45) NOT NULL,
@@ -53,28 +53,24 @@ INSERT INTO `pacjent` VALUES
 
 
 -- -----------------------------------------------------
--- Table `clinic`.`wizyta`
+-- Table `clinicDB`.`wizyta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinic`.`wizyta` (
+CREATE TABLE IF NOT EXISTS `clinicDB`.`wizyta` (
   `idWizyty` INT NOT NULL AUTO_INCREMENT,
   `Data` DATE NOT NULL,
   `Domowa` VARCHAR(3) NOT NULL,
   `Platna` VARCHAR(3) NOT NULL,
   `idLekarza` INT NOT NULL,
   `idPacjenta` INT NOT NULL,
-  PRIMARY KEY (`idWizyty`, `idLekarza`, `idPacjenta`),
-  INDEX `fk_wizyta_lekarz_idx` (`idLekarza` ASC),
-  INDEX `fk_wizyta_pacjent1_idx` (`idPacjenta` ASC),
-  CONSTRAINT `fk_wizyta_lekarz`
+  PRIMARY KEY (`idWizyty`),
     FOREIGN KEY (`idLekarza`)
-    REFERENCES `clinic`.`lekarz` (`idLekarza`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_wizyta_pacjent1`
+    REFERENCES `clinicDB`.`lekarz` (`idLekarza`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`idPacjenta`)
-    REFERENCES `clinic`.`pacjent` (`idPacjenta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `clinicDB`.`pacjent` (`idPacjenta`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 INSERT INTO `wizyta` VALUES
@@ -86,32 +82,26 @@ INSERT INTO `wizyta` VALUES
 
 
 -- -----------------------------------------------------
--- Table `clinic`.`skierowanie`
+-- Table `clinicDB`.`skierowanie`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinic`.`skierowanie` (
+CREATE TABLE IF NOT EXISTS `clinicDB`.`skierowanie` (
   `idSkierowania` INT NOT NULL AUTO_INCREMENT,
   `idPacjenta` INT NOT NULL,
   `idLekarza` INT NOT NULL,
   `idWizyty` INT NOT NULL,
-  PRIMARY KEY (`idSkierowania`, `idPacjenta`, `idLekarza`, `idWizyty`),
-  INDEX `fk_skierowanie_pacjent1_idx` (`idPacjenta` ASC),
-  INDEX `fk_skierowanie_lekarz1_idx` (`idLekarza` ASC),
-  INDEX `fk_skierowanie_wizyta1_idx` (`idWizyty` ASC),
-  CONSTRAINT `fk_skierowanie_pacjent1`
+  PRIMARY KEY (`idSkierowania`),
     FOREIGN KEY (`idPacjenta`)
-    REFERENCES `clinic`.`pacjent` (`idPacjenta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_skierowanie_lekarz1`
+    REFERENCES `clinicDB`.`pacjent` (`idPacjenta`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`idLekarza`)
-    REFERENCES `clinic`.`lekarz` (`idLekarza`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_skierowanie_wizyta1`
+    REFERENCES `clinicDB`.`lekarz` (`idLekarza`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`idWizyty`)
-    REFERENCES `clinic`.`wizyta` (`idWizyty`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `clinicDB`.`wizyta` (`idWizyty`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 INSERT INTO `skierowanie` VALUES
@@ -123,34 +113,28 @@ INSERT INTO `skierowanie` VALUES
 
 
 -- -----------------------------------------------------
--- Table `clinic`.`recepta`
+-- Table `clinicDB`.`recepta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinic`.`recepta` (
+CREATE TABLE IF NOT EXISTS `clinicDB`.`recepta` (
   `idRecepty` INT NOT NULL AUTO_INCREMENT,
   `idChoroby` INT NOT NULL,
   `Refundacja` INT NOT NULL,
   `idPacjenta` INT NOT NULL,
   `idLekarza` INT NOT NULL,
   `idWizyty` INT NOT NULL,
-  PRIMARY KEY (`idRecepty`, `idPacjenta`, `idLekarza`, `idWizyty`),
-  INDEX `fk_recepta_pacjent1_idx` (`idPacjenta` ASC),
-  INDEX `fk_recepta_lekarz1_idx` (`idLekarza` ASC),
-  INDEX `fk_recepta_wizyta1_idx` (`idWizyty` ASC),
-  CONSTRAINT `fk_recepta_pacjent1`
+  PRIMARY KEY (`idRecepty`),
     FOREIGN KEY (`idPacjenta`)
-    REFERENCES `clinic`.`pacjent` (`idPacjenta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_recepta_lekarz1`
+    REFERENCES `clinicDB`.`pacjent` (`idPacjenta`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`idLekarza`)
-    REFERENCES `clinic`.`lekarz` (`idLekarza`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_recepta_wizyta1`
+    REFERENCES `clinicDB`.`lekarz` (`idLekarza`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`idWizyty`)
-    REFERENCES `clinic`.`wizyta` (`idWizyty`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `clinicDB`.`wizyta` (`idWizyty`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

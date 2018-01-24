@@ -12,6 +12,13 @@ html(lang='pl')
       var url= '/panel?idLekarza=' + idLekarza;
       window.location.replace(url);
       }
+
+
+      function redirectToList() {
+      var login = location.search.split('idLekarza=')[1];
+      var url= '/listofdoctors?idLekarza=' + idLekarza;
+      window.location.replace(url);
+      }
   
     header
       main
@@ -27,4 +34,4 @@ html(lang='pl')
         ol#listofusers
           each val in values
             li  #{val.idLekarza}, #{val.login}, #{val.Specjalizacja}
-            a.button#userbutton(href='/delete?login=admin&userToDelete=' + val.login) Usuń
+            a.button#userbutton(href='/delete?idLekarza=admin&userToDelete=' + val.idLekarza) Usuń

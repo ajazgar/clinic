@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
   password : 'epokalodowcowa'
 });
 connection.connect();
-connection.query('USE clinic');
+connection.query('USE clinicDB');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -80,14 +80,15 @@ router.get('/checkIfUsernameExists', function(req, res, next) {
 
 
 //http://localhost:3000/delete?id=admin&userToDelete=AndrzejTomczynski
-// router.all('/delete', function(req, res, next) {
-//   var post = [req.query.userToDelete];
-//   var query = connection.query('delete from lekarz where login=?', post, function (error, results, fields) {
-//     if (error) throw error;
-//     if(req.query.login == undefined) res.redirect('/'); //in case of deleting own account
-//     else res.redirect('/listofdoctors?login='+req.query.login);  //case: admin delete somebody
-//   });
-// });
+router.all('/delete', function(req, res, next) {
+  var post = [req.query.userToDelete];
+  var query = connection.query('delete from lekarz where idLekarza=?', post, function (error, results, fields) {
+    if (error) throw error;
+    // if(req.query.idLekarza == undefined) res.redirect('/'); //in case of deleting own account
+    // else 
+    res.redirect('/listofdoctors?idLekarza='+req.query.idLekarza);  //case: admin delete somebody
+  });
+});
 
 
 router.get('/listofdoctors', function(req, res, next) {
