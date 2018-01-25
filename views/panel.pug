@@ -53,19 +53,19 @@ html(lang='pl')
           .content
             h2 Dodaj lekarza
             form#fields(action='/addDoctor')
-              input(type='text', name='idLekarza', placeholder='id')
-              input(type='text', name='login', placeholder='login')
-              input(type='text', name='Haslo', placeholder='Haslo')
-              input(type='text', name='Specjalizacja', placeholder='Specjalizacja')
-              input(type='submit', value='Dodaj')
+              input(type='text', name='idLekarza', placeholder='id', required='')
+              input.txt(type='text', name='login', placeholder='login', required='')
+              input.txt(type='password', name='Haslo', placeholder='Haslo', required='')
+              input.txt(type='text', name='Specjalizacja', placeholder='Specjalizacja', required='')
+              input.txt(type='submit', value='Dodaj')
       #popup2.overlay
         .popup
           a.close(href='#') ×
           .content#fields
             h2 Dodaj pacjenta
             form#fields(action='/addPatient')
-              input(type='text', name='idPacjenta', placeholder='id')
-              input(type='text', name='login', placeholder='login')
+              input(type='text', name='idPacjenta', placeholder='id', required='')
+              input.txt(type='text', name='login', placeholder='login', required='')
               input(type='submit', value='Dodaj')
       #popup3.overlay
         .popup
@@ -73,12 +73,12 @@ html(lang='pl')
           .content
             h2 Dodaj wizytę
             form#fields(action='/addAppointment')
-              input(type='text', name='idWizyty', placeholder='id Wizyty')
-              input(type='text', name='Data', placeholder='Data')
-              input(type='text', name='Domowa', placeholder='Domowa')
-              input(type='text', name='Platna', placeholder='Platna')
-              input(type='text', name='idLekarza', placeholder='id Lekarza')
-              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
+              input(type='text', name='idWizyty', placeholder='id Wizyty', required='')
+              input(type='text', name='Data', placeholder='Data', required='')
+              input.txt(type='text', name='Domowa', placeholder='Domowa', required='')
+              input.txt(type='text', name='Platna', placeholder='Platna', required='')
+              input(type='text', name='idLekarza', placeholder='id Lekarza', required='')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta', required='')
               input(type='submit', value='Dodaj')
       #popup4.overlay
         .popup
@@ -86,11 +86,11 @@ html(lang='pl')
           .content
             h2 Dodaj receptę
             form#fields(action='/addReceipt')
-              input(type='text', name='idRecepty', placeholder='id')
-              input(type='text', name='idChoroby', placeholder='id Choroby')
-              input(type='text', name='Refundacja', placeholder='Refundacja')
-              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
-              input(type='text', name='idLekarza', placeholder='id Lekarza')
+              input(type='text', name='idRecepty', placeholder='id', required='')
+              input(type='text', name='idChoroby', placeholder='id Choroby', required='')
+              input(type='text', name='Refundacja', placeholder='Refundacja', required='')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta', required='')
+              input(type='text', name='idLekarza', placeholder='id Lekarza', required='')
               input(type='submit', value='Dodaj')
       #popup5.overlay
         .popup
@@ -98,7 +98,7 @@ html(lang='pl')
           .content
             h2 Dodaj skierowanie
             form#fields(action='/addReferral')
-              input(type='text', name='idSkierowania', placeholder='id')
-              input(type='text', name='idPacjenta', placeholder='id Pacjenta')
-              input(type='text', name='idLekarza', placeholder='id Lekarza')
+              input(type='text', name='idSkierowania', placeholder='id', required='')
+              input(type='text', name='idPacjenta', placeholder='id Pacjenta', required='')
+              input(type='text', name='idLekarza', placeholder='id Lekarza', required='')
               input(type='submit', value='Dodaj')

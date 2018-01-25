@@ -34,4 +34,4 @@ html(lang='pl')
         ol#listofusers
           each val in values
             li  id:#{val.idLekarza}, login:#{val.login}, specjalizacja:#{val.Specjalizacja}
-            a.button#userbutton(href='/deleteDoctor?idLekarza=admin&userToDelete=' + val.idLekarza) Usuń
+            a.button#userbutton(href='/deleteDoctor?idLekarza=admin&doctorToDelete=' + val.idLekarza) Usuń
