@@ -10,13 +10,11 @@ var connection = mysql.createConnection({
 connection.connect();
 connection.query('USE clinicDB');
 
-/* GET home page. */
+//Home page
 router.get('/', function(req, res, next) {
   res.render('index', {"valid": req.query.valid});
 });
 
-
-//localhost:3000/panel
 router.get('/panel', function(req, res, next) {
   res.render('panel', {"valid": req.query.valid});
 });
@@ -63,7 +61,8 @@ router.get('/addReferral', function(req, res, next) {
   });
 });
 
-//http:localhost:3000/checkIfUsernameExists?login=admin&password=password
+
+
 router.get('/checkIfUsernameExists', function(req, res, next) {
   var post = [req.query.idLekarza, req.query.Haslo ];
   var query = connection.query('select count(*) as c from lekarz where idLekarza=? and Haslo=?', post, function (error, results, fields) {
@@ -79,7 +78,8 @@ router.get('/checkIfUsernameExists', function(req, res, next) {
 });
 
 
-//http://localhost:3000/delete?id=admin&userToDelete=AndrzejTomczynski
+
+//DELETING
 router.all('/deleteDoctor', function(req, res, next) {
   var post = [req.query.doctorToDelete];
   var query = connection.query('delete from lekarz where idLekarza=?', post, function (error, results, fields) {

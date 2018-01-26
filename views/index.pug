@@ -9,10 +9,10 @@ html(lang='pl')
     main
       .middle-text
         .content-text
-          h1 Welcome to Clinic!
+          h1 Witaj w klinice!
         form#fields(action='/checkIfUsernameExists')
-          input#login.txt(type='text', name='idLekarza', required='', placeholder='Your id')
+          input#login.txt(type='text', name='idLekarza', required='', placeholder='id')
           br
-          input.txt(type='password', name='Haslo', required='', placeholder='Password')
+          input.txt(type='password', name='Haslo', required='', placeholder='Hasło')
           br
           input(type='submit', value='Zaloguj')
